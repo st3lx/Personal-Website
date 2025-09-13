@@ -2,14 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>{{ title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title | default("Tianer Tang – Personal Website") }}</title>
+  <link rel="stylesheet" href="/css/styles.css">
+
 </head>
 <body>
   <header>
-    <h1>{{ title }}</h1>
+    <h1>{{ title | default("Tianer Tang") }}</h1>
+    <p>{{ description | default("Hello, this is Tianer Tang. See my essays, research projects, and activities in mathematics, philosophy, cyber security, and classical music.") }}</p>
   </header>
+
   <main>
     {{ content | safe }}
   </main>
+
+  <footer>
+    <hr>
+    <p>© 2025 Tianer Tang | <a href="https://github.com/st3lx">GitHub</a></p>
+  </footer>
 </body>
 </html>
+

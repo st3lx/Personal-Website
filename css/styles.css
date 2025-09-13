@@ -1,0 +1,109 @@
+
+/* Overleaf-like serif font */
+body {
+    font-family: "Latin Modern Roman", "Times New Roman", serif;
+    background-color: #e6edf2; /* soft blue-grey */
+    color: #111;               /* black text */
+    margin: 2rem;
+    padding: 2rem;
+    border: 1px solid #ccc;    /* thin border */
+    border-radius: 6px;
+}
+
+header {
+    border: none;
+    text-align: center;
+    margin-bottom: 2rem;
+    /* REMOVE font-size from here */
+}
+
+/* New, more specific rule for the main title */
+header h1 {
+    font-size: 3rem; /* Now this only targets h1s inside the header */
+    color: #222;
+    margin: 1rem 0; /* Adjust margins for the main title specifically */
+}
+
+/* Then keep your rule for other h1s and h2s elsewhere on the page */
+h1, h2 {
+    color: #222;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.6rem;
+}
+
+/* Target the specific Welcome title */
+.welcome-title {
+  font-size: 2.5rem; /* Make it much larger than a normal h2 */
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center; /* Optional: to center it */
+}
+
+p {
+  font-size: 1.4rem; /* Increases the base paragraph size */
+  font-weight: 480;
+}
+r {
+  font-size: 1.2rem; /* Increases the base paragraph size */
+  font-weight: 440;
+}
+
+/* Links */
+a {
+    color: #0066cc;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* List styling */
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+li {
+    margin-bottom: 0.5rem;
+}
+
+/* PDF links */
+.pdf-link {
+    font-style: italic;
+}
+
+.project-link {
+  font-weight: 600; /* Makes the project name bold */
+}
+
+.git-link {
+  font-size: 0.9rem; /* Makes the (.git) link slightly smaller */
+  color: #666;       /* A lighter gray color */
+  margin-left: 0.5rem; /* Adds a small space between the links */
+  text-decoration: none;
+}
+
+.git-link:hover {
+  text-decoration: underline;
+}
+
+/* Target the list itself for spacing */
+.essays-list {
+  margin-left: 1.5rem; /* Adjust indentation if needed */
+}
+
+/* Target the link (the essay title) inside the list */
+.essays-list a {
+  font-size: 1.22rem;    /* Increase this value to make titles larger */
+  font-weight: 400;     /* Makes the titles bold */
+  color: #0066cc;       /* Your link color */
+  line-height: 1.4;     /* Adds more space between each list item for readability */
+}
+
+/* Optional: Style the list items for better spacing */
+.essays-list li {
+  margin-bottom: 0.75rem; /* Increases space between each essay entry */
+}
+
+
