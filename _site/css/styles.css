@@ -42,7 +42,7 @@ h1, h2 {
 }
 
 p {
-  font-size: 1.4rem; /* Increases the base paragraph size */
+  font-size: 1.48rem; /* Increases the base paragraph size */
   font-weight: 480;
 }
 r {
@@ -78,9 +78,9 @@ li {
 }
 
 .git-link {
-  font-size: 0.9rem; /* Makes the (.git) link slightly smaller */
-  color: #666;       /* A lighter gray color */
-  margin-left: 0.5rem; /* Adds a small space between the links */
+  font-size: 1.4rem; /* Makes the (.git) link slightly smaller */
+  color: #4d4c4c;       /* A lighter gray color */
+  margin-left: 0.8rem; /* Adds a small space between the links */
   text-decoration: none;
 }
 
@@ -95,7 +95,7 @@ li {
 
 /* Target the link (the essay title) inside the list */
 .essays-list a {
-  font-size: 1.22rem;    /* Increase this value to make titles larger */
+  font-size: 1.36rem;    /* Increase this value to make titles larger */
   font-weight: 400;     /* Makes the titles bold */
   color: #0066cc;       /* Your link color */
   line-height: 1.4;     /* Adds more space between each list item for readability */
@@ -107,3 +107,31 @@ li {
 }
 
 
+/* Target the list itself for spacing */
+.web-app {
+  margin-left: 1.5rem; /* Adjust indentation if needed */
+}
+
+/* Target the link (the essay title) inside the list */
+.web-app a {
+  font-size: 1.64rem;    /* Increase this value to make titles larger */
+  font-weight: 480;     /* Makes the titles bold */
+  color: #0066cc;       /* Your link color */
+  line-height: 1.4;     /* Adds more space between each list item for readability */
+}
+
+/* Optional: Style the list items for better spacing */
+.web-app li {
+  margin-bottom: 1.6rem; /* Increases space between each essay entry */
+}
+
+.web-app a.git-link {
+  font-size: 1.4rem;  /* override the bigger font */
+  color: #444444;        /* lighter gray */
+  margin-left: 0.8rem;
+  text-decoration: none;
+}
+
+.web-app a.git-link:hover {
+    text-decoration: underline;
+}

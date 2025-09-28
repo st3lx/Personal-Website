@@ -10,7 +10,19 @@
 <body>
   <header>
     <h1>{{ title | default("Tianer Tang") }}</h1>
-    <p>{{ description | default("Hello, this is Tianer Tang. See my essays, research projects, and activities in mathematics, philosophy, cyber security, and classical music.") }}</p>
+  <p id="typing"></p>
+  <script>
+  const text = "{{ description | default("Hello, this is Tianer Tang. See my essays, research projects, and activities in mathematics, philosophy, cyber security, and classical music.") }}";
+  let i = 0;
+  function type() {
+   if (i < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(type, 28);
+   }
+  }
+  type();
+  </script>
   </header>
 
   <main>
@@ -19,7 +31,7 @@
 
   <footer>
     <hr>
-    <p>© 2025 Tianer Tang | <a href="https://github.com/st3lx">GitHub</a></p>
+    <p>© 2025 Tianer Tang | <a href="https://github.com/st3lx">GitHub</a> | <a href="mailto:stellatang08@hotmail.com">stellatang08@hotmail.com</a> </p>
   </footer>
 </body>
 </html>

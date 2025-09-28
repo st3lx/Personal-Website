@@ -10,33 +10,62 @@
 <body>
   <header>
     <h1>Sttel&#39;s Personal Website</h1>
-    <p>Hello, this is Tianer Tang. See my essays, research projects, and activities in mathematics, philosophy, cyber security, and classical music.</p>
+  <p id="typing"></p>
+  <script>
+  const text = "Hello, this is Tianer Tang. See my essays, research projects, and activities in mathematics, philosophy, cyber security, and classical music.";
+  let i = 0;
+  function type() {
+   if (i < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(type, 28);
+   }
+  }
+  type();
+  </script>
   </header>
 
   <main>
     <h2><h2 class="welcome-title">Welcome</h2></h2>
-<p>I used to think: &quot;what sort of conceited people will make websites of themselves?&quot; Then near-application I found it indeed a great way to analyze oneself, showcase personalities, and self-motivate.
-Content below includes a portion what I completed during these two years:
-philosophy + mathematics essays, maths and physics projects, an add-on for cyber security, and a web app.</p>
+<p>Near-application I found making a personal website a great way to analyze oneself, showcase personalities, and self-motivate.
+Content below includes a portion of what I completed these two years:
+philosophy + mathematics essays, maths and physics projects, and two web apps.</p>
 <hr>
-<h2>Research (and Non-Research) Projects</h2>
+<h2>App + Web Apps</h2>
+<div class="web-app">
+<p class="subtitle">App for Recovering Deleted/Outdated Messages from Any Media </p>
+<p><a href="https://chatguardian.netlify.app/">ChatGuardian</a><a href="https://github.com/st3lx/ChatGuardian" class="git-link">(Github Link) </a></p>
+<p class="subtitle">Web-based Network Security Checker (User-friendly) </p>
+<p><a href="https://wifis4f3tyc0pil0t.netlify.app/">Wifi Safety Copilot</a><a href="https://github.com/st3lx/WifiS4f3tyC0pi10t" class="git-link">(Github Link) </a></p>
+<p class="subtitle">Interactive Music Visualization (Designed for Alleviation of Depression Symptoms) </p>
+<p><a href="https://substrata101.netlify.app/">Substrata101</a>
+<a href="https://github.com/st3lx/All-My-Days" class="git-link">(Github Link) </a></p>
+</div>
+<hr>
+<h2>Research (and Non-Research) Projects + Mathematical Detours</h2>
 <ul>
 <li>
 <p><a href="https://68c5a6dd39c4a641f2e29653--minkowskiimprove.netlify.app/SantaProject.pdf">Improving the Minkowski Constant (Yau Mathcamp Gold Prize)</a> <a href="https://github.com/st3lx/Santa" class="git-link">(Github Link)</a></p>
 </li>
 <li>
-<p><a href=".pdf">A Comparative Study of Bose–Einstein Condensate and Navarro-Frenk-White Profiles in SPARC Galaxies (CCIR, Machine Learning+Dark Matter)</a></p>
+<p><a href=".pdf">A Comparative Study of Bose–Einstein Condensate and Navarro-Frenk-White Profiles in SPARC Galaxies </br>(CCIR, Machine Learning+Dark Matter)</a> <a href="https://github.com/st3lx/CCIR_BEC_NFW" class="git-link">(Github Link)</a></p>
 </li>
 <li>
 <p><a href="%5Cresearch%5COrbitalIndustry.pptx">Venus Space City Design, Construction, and Planning（National 1st Place）</a></p>
 </li>
+<li>
+<p><a href="problems/LA.pdf">Some Intriguing Problems in Linear Algebra Done Right</a></p>
+</li>
+<li>
+<p><a href="problems/Analysis.pdf">Some Intriguing Problems in Kaczor and Nowak's Analysis</a></p>
+</li>
+<li>
+<p><a href="problems/AA.pdf">Some Intriguing Problems in Dummit and Foote's Abstract Algebra</a></p>
+</li>
+<li>
+<p><a href="problems/PB.pdf">Some Intriguing Problems in Putnam and Beyond</a></p>
+</li>
 </ul>
-<hr>
-<h2>Add-on For Community Wifi Safety</h2>
-<p><a href="https://github.com/st3lx/WifiS4f3tyC0pi10t">Wifi Safety Copilot</a></p>
-<hr>
-<h2>Web App for Visualization of Classical Music (Designed for Alleviation of Depression Symptoms)</h2>
-<p><a href="https://your-website-url.com">All My Days</a> <a href="https://github.com/st3lx/All-My-Days" class="git-link">(Github Link) </a></p>
 <hr>
 <h2>Essays</h2>
 <div class="essays-list">
@@ -69,13 +98,6 @@ philosophy + mathematics essays, maths and physics projects, an add-on for cyber
 <li><a href="essays/handmaid.pdf">On The Handmaid's Tale</a></li>
 <li><a href="essays/pap.pdf">On Pride and Prejudice</a></li>
 </ul>
-<p class="subtitle">Solutions to Math Problems</p>
-<ul>
-<li><a href="problems/LA.pdf">Some Intriguing Problems in Linear Algebra Done Right</a></li>
-<li><a href="problems/Analysis.pdf">Some Intriguing Problems in Kaczor and Nowak's Analysis</a></li>
-<li><a href="problems/AA.pdf">Some Intriguing Problems in Dummit and Foote's Abstract Algebra</a></li>
-<li><a href="problems/PB.pdf">Some Intriguing Problems in Putnam and Beyond</a></li>
-</ul>
 </div>
 <hr>
 <h2>Classical Music Pieces Discussed and Performed</h2>
@@ -91,7 +113,7 @@ philosophy + mathematics essays, maths and physics projects, an add-on for cyber
 
   <footer>
     <hr>
-    <p>© 2025 Tianer Tang | <a href="https://github.com/st3lx">GitHub</a></p>
+    <p>© 2025 Tianer Tang | <a href="https://github.com/st3lx">GitHub</a> | <a href="mailto:stellatang08@hotmail.com">stellatang08@hotmail.com</a> </p>
   </footer>
 </body>
 </html>
