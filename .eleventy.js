@@ -1,17 +1,17 @@
 // .eleventy.js
 module.exports = function(eleventyConfig) {
-  // Copy the `css` directory to the output `_site/css`
+  // Pass through important static folders
   eleventyConfig.addPassthroughCopy("css");
-  
-  // You can add other folders too (very common for images, js, fonts)
+  eleventyConfig.addPassthroughCopy("public");
+
+  // Optional: If you also want your JS, images, etc.
+  // eleventyConfig.addPassthroughCopy("scripts");
   // eleventyConfig.addPassthroughCopy("images");
-  // eleventyConfig.addPassthroughCopy("js");
-  
-  // You can return your Config options (optional but common)
+
   return {
     dir: {
-      input: "src",    // Your source files are in `src/`
-      output: "_site"  // This is the default output directory
+      input: "src",
+      output: "_site"
     }
   };
 };

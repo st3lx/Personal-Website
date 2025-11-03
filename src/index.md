@@ -13,9 +13,9 @@ philosophy + mathematics essays, maths and physics projects, and two web apps.
 
 ## App + Web Apps
 <div class="web-app">
-<p class="subtitle">App for Recovering Deleted/Outdated Messages from Any Media </p>
+<p class="subtitle">App for Unified Import, Navigation, Search, and Security Analysis from Multiple Apps </p>
 
-[ChatGuardian](https://chatguardian.netlify.app/)<a href="https://github.com/st3lx/ChatGuardian" class="git-link">(Github Link) </a>
+[ChatConverge](https://chatconverge.netlify.app/)<a href="https://github.com/st3lx/ChatConverge" class="git-link">(Github Link) </a>
 
 <p class="subtitle">Web-based Network Security Checker (User-friendly) </p>
 
@@ -30,11 +30,13 @@ philosophy + mathematics essays, maths and physics projects, and two web apps.
 ---
 
 ## Research (and Non-Research) Projects + Mathematical Detours
-- [Improving the Minkowski Constant (Yau Mathcamp Gold Prize)](https://68c5a6dd39c4a641f2e29653--minkowskiimprove.netlify.app/SantaProject.pdf) <a href="https://github.com/st3lx/Santa" class="git-link">(Github Link)</a>
+- [Improving the Minkowski Constant (Yau Mathcamp Gold Prize)](https://minkowskiimprove.netlify.app/SantaProject.pdf) <a href="https://github.com/st3lx/Santa" class="git-link">(Github Link)</a>
 
 - [A Comparative Study of Bose–Einstein Condensate and Navarro-Frenk-White Profiles in SPARC Galaxies </br>(CCIR, Machine Learning+Dark Matter)](.pdf) <a href="https://github.com/st3lx/CCIR_BEC_NFW" class="git-link">(Github Link)</a>
 
-- [Venus Space City Design, Construction, and Planning（National 1st Place）](\research\OrbitalIndustry.pptx)
+- [Quantum Period-Finding for Noisy Signal Analysis via Hybrid QFT Simulation](.pdf) <a href="https://github.com/st3lx/QFT" class="git-link">(Github Link)</a>
+
+- [Venus Space City Design, Construction, and Planning（National 1st Place）]()
 
 - [Some Intriguing Problems in Linear Algebra Done Right](problems/LA.pdf)
 
@@ -91,3 +93,5 @@ philosophy + mathematics essays, maths and physics projects, and two web apps.
   (PDF)
 
 [Portfolio]() / [Performance Clips]()
+---
+
