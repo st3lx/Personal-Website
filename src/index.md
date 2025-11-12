@@ -31,7 +31,7 @@ philosophy + mathematics essays, maths and physics projects, an app, two web app
 ## Research (and Non-Research) Projects + Mathematical Detours
 - [Improving the Minkowski Constant (Yau Mathcamp Gold Prize)](https://sttelpersonalwebsite.netlify.app/Minkowski-Project-main/public/SantaProject.pdf) <a href="https://github.com/st3lx/Santa" class="git-link">(Github Link)</a>
 
-- [A Comparative Study of Bose–Einstein Condensate and Navarro-Frenk-White Profiles in SPARC Galaxies </br>(CCIR, Machine Learning+Dark Matter)](https://sttelpersonalwebsite.netlify.app/Minkowski-Project-main/public/Tianer_Tang_CCIR.pdf)
+- [A Comparative Study of Bose–Einstein Condensate and Navarro-Frenk-White Profiles in SPARC Galaxies </br>(CCIR, Machine Learning+Dark Matter)](https://sttelpersonalwebsite.netlify.app/Minkowski-Project-main/public/TianerTangCCIR.pdf)
 
 - [Quantum Period-Finding for Noisy Signal Analysis via Hybrid QFT Simulation](.pdf) <a href="https://github.com/st3lx/QFT" class="git-link">(Github Link)</a>
 
