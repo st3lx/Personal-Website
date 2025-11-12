@@ -5,9 +5,8 @@ title: "Sttel's Personal Website"
 
 ## <h2 class="welcome-title">Welcome</h2>
 
-Near-application I found making a personal website a great way to analyze oneself, showcase personalities, and self-motivate.
 Content below includes a portion of what I completed these two years: 
-philosophy + mathematics essays, maths and physics projects, and two web apps.
+philosophy + mathematics essays, maths and physics projects, an app, two web apps, and music portfolios.
 
 ---
 
@@ -32,7 +31,7 @@ philosophy + mathematics essays, maths and physics projects, and two web apps.
 ## Research (and Non-Research) Projects + Mathematical Detours
 - [Improving the Minkowski Constant (Yau Mathcamp Gold Prize)](https://sttelpersonalwebsite.netlify.app/Minkowski-Project-main/public/SantaProject.pdf) <a href="https://github.com/st3lx/Santa" class="git-link">(Github Link)</a>
 
-- [A Comparative Study of Bose–Einstein Condensate and Navarro-Frenk-White Profiles in SPARC Galaxies </br>(CCIR, Machine Learning+Dark Matter)](.pdf) <a href="https://github.com/st3lx/CCIR_BEC_NFW" class="git-link">(Github Link)</a>
+- [A Comparative Study of Bose–Einstein Condensate and Navarro-Frenk-White Profiles in SPARC Galaxies </br>(CCIR, Machine Learning+Dark Matter)](https://sttelpersonalwebsite.netlify.app/Minkowski-Project-main/public/TianerTang_CCIR(5).pdf)
 
 - [Quantum Period-Finding for Noisy Signal Analysis via Hybrid QFT Simulation](.pdf) <a href="https://github.com/st3lx/QFT" class="git-link">(Github Link)</a>
 
