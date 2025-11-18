@@ -5,8 +5,13 @@ title: "Sttel's Personal Website"
 
 ## <h2 class="welcome-title">Welcome</h2>
 
-Content below includes a portion of what I completed these two years: 
-philosophy + mathematics essays, maths and physics projects, an app, two web apps, and music portfolios.
+In attempts to unite the *I* with the statue in which man projects himself, and phantoms that dominate us, 
+
+with automatons with whimsical functions, and ambiguous relations between everything everywhere, 
+
+the world of my making tends to completion, and below is a portion I made over these two years:
+
+essays in philosophy and mathematics, research in maths and physics, an app, two web projects, and music portfolios.
 
 ---
 
@@ -33,9 +38,9 @@ philosophy + mathematics essays, maths and physics projects, an app, two web app
 
 - [A Comparative Study of Bose–Einstein Condensate and Navarro-Frenk-White Profiles in SPARC Galaxies </br>(CCIR, Machine Learning+Dark Matter)](https://sttelpersonalwebsite.netlify.app/Minkowski-Project-main/public/TianerTangCCIR.pdf)
 
-- [Quantum Period-Finding for Noisy Signal Analysis via Hybrid QFT Simulation](.pdf) <a href="https://github.com/st3lx/QFT" class="git-link">(Github Link)</a>
-
 - [Venus Space City Design, Construction, and Planning（National 1st Place）](https://sttelpersonalwebsite.netlify.app/Minkowski-Project-main/public/Orbital%20Industry.pdf)
+
+- [Quantum Period-Finding for Noisy Signal Analysis via Hybrid QFT Simulation](.pdf) <a href="https://github.com/st3lx/QFT" class="git-link">(Github Link)</a>
 
 - [Some Intriguing Problems in Linear Algebra Done Right](problems/LA.pdf)
 
