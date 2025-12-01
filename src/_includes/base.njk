@@ -8,6 +8,335 @@
 
 </head>
 <body>
+<!-- Intro: key builds then dissolves (1s) - paste at top of .md -->
+<div id="intro-overlay" aria-hidden="true">
+  <canvas id="intro-canvas"></canvas>
+</div>
+
+<style>
+  #intro-overlay {
+    position: fixed;
+    inset: 0;
+    background: #000; /* black background */
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    pointer-events:none;
+  }
+  #intro-canvas {
+    width: 40vw;
+    max-width: 680px;
+    height: auto;
+    aspect-ratio: 1.78/1; /* wide-ish cinematic */
+    display:block;
+  }
+  /* safety: hide when removed */
+  #intro-overlay.removing { transition: opacity 0.45s ease; opacity: 0; }
+</style>
+
+<script>
+(() => {
+  const DURATION = 1600; // 1 second total
+  const canvas = document.getElementById('intro-canvas');
+  const overlay = document.getElementById('intro-overlay');
+
+  // sizing for crispness
+  function resize() {
+    const ratio = Math.max(window.devicePixelRatio || 1, 1);
+    const cssW = canvas.clientWidth || window.innerWidth;
+    const cssH = canvas.clientHeight || (cssW * 0.56);
+    canvas.width = Math.round(cssW * ratio);
+    canvas.height = Math.round(cssH * ratio);
+    canvas.style.height = cssH + 'px';
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); });
+
+  // create offscreen 2D canvas that will contain the drawn key/signature
+  const off = document.createElement('canvas');
+  const offCtx = off.getContext('2d', { willReadFrequently: true });
+
+  // WebGL setup
+  const gl = canvas.getContext('webgl', { antialias: true });
+  if (!gl) {
+    // fallback: just show nothing and remove overlay quickly
+    setTimeout(() => overlay.remove(), 500);
+    return;
+  }
+
+  // compile helpers
+  function compile(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+      console.error(gl.getShaderInfoLog(s));
+      gl.deleteShader(s);
+      return null;
+    }
+    return s;
+  }
+  function link(vs, fs) {
+    const p = gl.createProgram();
+    gl.attachShader(p, vs);
+    gl.attachShader(p, fs);
+    gl.linkProgram(p);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) {
+      console.error(gl.getProgramInfoLog(p));
+      gl.deleteProgram(p);
+      return null;
+    }
+    return p;
+  }
+
+  // vertex shader (simple quad)
+  const vsSrc = `
+  attribute vec2 a_pos;
+  varying vec2 v_uv;
+  void main(){
+    v_uv = a_pos * 0.5 + 0.5;
+    gl_Position = vec4(a_pos, 0.0, 1.0);
+  }`;
+  // fragment shader: texture + noise-based "Fourier-ish" dissolve
+  const fsSrc = `
+  precision highp float;
+  varying vec2 v_uv;
+  uniform sampler2D u_tex;
+  uniform float u_time;       // seconds since start
+  uniform float u_dissolve;   // 0 -> 1
+  uniform float u_aspect;
+
+  // hash / noise
+  float hash(vec2 p){ p = fract(p*vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
+  float noise(vec2 p){
+    vec2 i = floor(p);
+    vec2 f = fract(p);
+    float a = hash(i);
+    float b = hash(i + vec2(1.0, 0.0));
+    float c = hash(i + vec2(0.0, 1.0));
+    float d = hash(i + vec2(1.0, 1.0));
+    vec2 u = f*f*(3.0 - 2.0*f);
+    return mix(a, b, u.x) + (c - a)*u.y*(1.0 - u.x) + (d - b)*u.x*u.y;
+  }
+
+  void main(){
+    // sample base texture
+    vec2 uv = v_uv;
+    // center coords for radial behavior
+    vec2 c = uv - 0.5;
+    c.x *= u_aspect; // account for aspect
+    float r = length(c);
+
+    // create a frequency-like mask: higher frequencies further out
+    float freqMask = smoothstep(0.03, 0.5, r) * 5.0;
+
+    // time-modulated noise
+    float t = u_time * 2.0;
+    float n = noise(uv * (40.0 * (0.5 + freqMask)) + vec2(t*1.3, -t*0.7));
+
+    // displacement amount grows with dissolve
+    float disp = pow(u_dissolve, 1.4) * 0.18;
+
+    // displace UV by noise in polar way for "frequency scatter"
+    float angle = noise(uv * 10.0 + t) * 6.28318;
+    vec2 offset = vec2(cos(angle), sin(angle)) * (n - 0.5) * disp;
+    vec2 sampleUV = uv + offset;
+
+    // sample texture with displacement
+    vec4 tex = texture2D(u_tex, sampleUV);
+
+    // create speckle / grain controlled by dissolve
+    float speck = step(0.6, fract(n * 100.0 + t*10.0)) * u_dissolve;
+
+    // modulate alpha: as dissolve approaches 1, fade out the texture
+    float alpha = tex.a * (1.0 - u_dissolve * 1.05);
+    // add speckle bright charcoal pixels
+    vec3 charcoal = vec3(0.7); // charcoal gray
+    vec3 base = mix(charcoal * tex.rgb, vec3(0.0), 1.0 - tex.a);
+
+    // mix in bright speckles (simulating frequency domain speckle)
+    base = mix(base, vec3(0.36 + 0.08*fract(n*10.0)), speck * 0.8);
+
+    // final output: black background with charcoal key
+    gl_FragColor = vec4(base, alpha);
+    // if fully transparent, discard (improves compositing)
+    if (gl_FragColor.a < 0.005) discard;
+  }`;
+
+  // compile/link
+  const vs = compile(gl.VERTEX_SHADER, vsSrc);
+  const fs = compile(gl.FRAGMENT_SHADER, fsSrc);
+  const program = link(vs, fs);
+  gl.useProgram(program);
+
+  // attributes/uniforms
+  const aPos = gl.getAttribLocation(program, 'a_pos');
+  const u_tex = gl.getUniformLocation(program, 'u_tex');
+  const u_time = gl.getUniformLocation(program, 'u_time');
+  const u_dissolve = gl.getUniformLocation(program, 'u_dissolve');
+  const u_aspect = gl.getUniformLocation(program, 'u_aspect');
+
+  // set up fullscreen quad
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  const verts = new Float32Array([
+    -1, -1,
+     1, -1,
+    -1,  1,
+    -1,  1,
+     1, -1,
+     1,  1
+  ]);
+  gl.bufferData(gl.ARRAY_BUFFER, verts, gl.STATIC_DRAW);
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  // texture that we'll upload the offscreen canvas to
+  const texture = gl.createTexture();
+  gl.activeTexture(gl.TEXTURE0);
+  gl.bindTexture(gl.TEXTURE_2D, texture);
+  // placeholder
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 2,2, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]));
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.uniform1i(u_tex, 0);
+
+  // drawing parameters for offscreen canvas
+  function prepareOffCanvas(w, h) {
+    off.width = w;
+    off.height = h;
+    // scale to high density
+    offCtx.setTransform(1,0,0,1,0,0);
+    offCtx.clearRect(0,0,w,h);
+    // background transparent - we only draw charcoal strokes
+  }
+
+  // path for a stylized key (centered)
+  function drawKey(progress) {
+    // progress: 0..1 for stroke drawing
+    const w = off.width, h = off.height;
+    offCtx.clearRect(0,0,w,h);
+
+    // styling
+    offCtx.lineCap = 'round';
+    offCtx.lineJoin = 'round';
+    const strokeWidth = Math.max(6, Math.floor(Math.min(w,h) * 0.025));
+    offCtx.strokeStyle = '#cccccc'; // charcoal gray
+    offCtx.lineWidth = strokeWidth;
+    offCtx.globalAlpha = 1.0;
+
+    // coordinates normalized
+    const cx = w * 0.42;
+    const cy = h * 0.5;
+    const r = Math.min(w, h) * 0.34;
+
+    // We'll build an array of path segments (bezier/lines) and stroke partial length
+    // Segment 1: circle head (arc)
+    // Segment 2: shaft (line)
+    // Segment 3: teeth (small lines)
+
+    // Construct a path on a Path2D, then stroke with dash to emulate drawing
+    const p = new Path2D();
+
+    // circle head quarter (we draw most of the circle)
+    p.arc(cx, cy, r, Math.PI*0.25, Math.PI*1.85, false);
+
+    // shaft
+    const shaftStartX = cx + Math.cos(Math.PI*1.85) * r;
+    const shaftStartY = cy + Math.sin(Math.PI*1.85) * r;
+    const shaftEndX = shaftStartX + Math.min(w,h) * 0.5;
+    const shaftEndY = shaftStartY + Math.min(w,h) * 0.02;
+    p.moveTo(shaftStartX, shaftStartY);
+    p.lineTo(shaftEndX, shaftEndY);
+
+    // teeth (three little notches)
+    const toothX = shaftEndX - Math.min(w,h) * 0.09;
+    const toothY = shaftEndY;
+    p.moveTo(shaftEndX - Math.min(w,h) * 0.06, toothY);
+    p.lineTo(shaftEndX - Math.min(w,h) * 0.06, toothY + Math.min(w,h) * 0.045);
+    p.moveTo(shaftEndX - Math.min(w,h) * 0.18, toothY);
+    p.lineTo(shaftEndX - Math.min(w,h) * 0.18, toothY + Math.min(w,h) * 0.035);
+
+    // signature flourish: a subtle swoop near the circle
+    p.moveTo(cx - r*0.6, cy + r*0.9);
+    p.quadraticCurveTo(cx + r*0.1, cy + r*1.35, cx + r*0.9, cy + r*0.6);
+
+    // Stroke the path progressively: use setLineDash to emulate drawing!
+    // measure total path length by drawing to an in-memory canvas Path2D length isn't available,
+    // so emulate progress by mapping progress to dash/gap: dash = totalLen * progress, gap = big
+    const totalLen = Math.max(w,h) * 3.6; // heuristic; works across sizes
+    const dash = Math.max(1, totalLen * progress);
+    offCtx.setLineDash([dash, totalLen]);
+    offCtx.stroke(p);
+
+    // subtle filled center to give weight
+    offCtx.globalCompositeOperation = 'source-over';
+    // add a faint filled ring near the circle while building
+   offCtx.fillStyle = 'rgba(204,204,204,' + (0.1 + 0.6*progress) + ')';
+    offCtx.beginPath();
+    offCtx.arc(cx, cy, r*0.55, 0, Math.PI*2);
+    offCtx.fill();
+
+    // reset dash
+    offCtx.setLineDash([]);
+  }
+
+  // animation loop
+  let start = null;
+  function frame(ts) {
+    if (!start) start = ts;
+    const elapsed = ts - start;
+    const progress = Math.min(1, elapsed / DURATION);
+
+    // DRY: compute phases
+    // drawPhase: 0..1 during first 0.6s (build)
+    const drawPhase = Math.min(1, progress / 0.6);
+    // dissolvePhase: starts at 0.6 -> 1.0 (0..1)
+    const dissolvePhase = Math.max(0, (progress - 0.6) / 0.4);
+
+    // update offscreen canvas size proportional to gl canvas
+    prepareOffCanvas(Math.max(256, Math.floor(canvas.width * 0.9)), Math.max(256, Math.floor(canvas.height * 0.9)));
+
+    // draw the key with drawPhase progress
+    drawKey(drawPhase);
+
+    // upload to GPU
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, off);
+
+    // set viewport & clear
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    gl.clearColor(0,0,0,0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+
+    // pass uniforms
+    gl.uniform1f(u_time, elapsed / 1000);
+    gl.uniform1f(u_dissolve, dissolvePhase);
+    const aspect = (canvas.width / canvas.height);
+    gl.uniform1f(u_aspect, aspect);
+
+    // draw
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+    if (progress < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      // finished: fade out overlay and remove
+      overlay.classList.add('removing');
+      setTimeout(() => {
+        overlay.remove();
+      }, 480);
+    }
+  }
+
+  // small delay to ensure layout paint ready
+  requestAnimationFrame(frame);
+})();
+</script>
   <header>
     <h1>{{ title | default("Tianer Tang") }}</h1>
   <p id="typing"></p>
