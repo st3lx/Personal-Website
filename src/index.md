@@ -40,8 +40,6 @@ essays in philosophy and mathematics, research in maths and physics, an app, two
 
 - [Venus Space City Design, Construction, and Planning（National 1st Place）](https://sttelpersonalwebsite.netlify.app/Minkowski-Project-main/public/Orbital%20Industry.pdf)
 
-- [Quantum Period-Finding for Noisy Signal Analysis via Hybrid QFT Simulation](.pdf) <a href="https://github.com/st3lx/QFT" class="git-link">(Github Link)</a>
-
 - [Some Intriguing Problems in Linear Algebra Done Right](https://www.overleaf.com/project/68c6663c85d864db9b287807)
 
 - [Some Intriguing Problems in Kaczor and Nowak's Analysis](https://www.overleaf.com/read/pjbrtscxdbzp#aa54e1)
