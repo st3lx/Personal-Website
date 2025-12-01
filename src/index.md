@@ -9,7 +9,7 @@ In attempts to unite the *I* with the statue in which man projects himself, and 
 
 with automatons with whimsical functions, and ambiguous relations between everything everywhere, 
 
-the world of my making tends to completion, and below is a portion I made over these two years:
+the world of my making steps towards completion, and below is a portion I made over these two years:
 
 essays in philosophy and mathematics, research in maths and physics, an app, two web projects, and music portfolios.
 
@@ -19,7 +19,7 @@ essays in philosophy and mathematics, research in maths and physics, an app, two
 <div class="web-app">
 <p class="subtitle">App for Unified Import, Navigation, Search, and Security Analysis from Multiple Apps </p>
 
-[ChatConverge](https://chatconverge.netlify.app/)<a href="https://github.com/st3lx/ChatConverge" class="git-link">(Github Link) </a>
+[ChatConverge](https://github.com/st3lx/ChatConverge)<a href="https://github.com/st3lx/ChatConverge" class="git-link">(Github Link) </a>
 
 <p class="subtitle">Web-based Network Security Checker (User-friendly) </p>
 
@@ -42,13 +42,15 @@ essays in philosophy and mathematics, research in maths and physics, an app, two
 
 - [Quantum Period-Finding for Noisy Signal Analysis via Hybrid QFT Simulation](.pdf) <a href="https://github.com/st3lx/QFT" class="git-link">(Github Link)</a>
 
-- [Some Intriguing Problems in Linear Algebra Done Right](problems/LA.pdf)
+- [Some Intriguing Problems in Linear Algebra Done Right](https://www.overleaf.com/project/68c6663c85d864db9b287807)
 
-- [Some Intriguing Problems in Kaczor and Nowak's Analysis](problems/Analysis.pdf)
+- [Some Intriguing Problems in Kaczor and Nowak's Analysis](https://www.overleaf.com/read/pjbrtscxdbzp#aa54e1)
 
-- [Some Intriguing Problems in Dummit and Foote's Abstract Algebra](problems/AA.pdf)
+- [Some Intriguing Problems in Dummit and Foote's Abstract Algebra](https://www.overleaf.com/read/xjgkbhzvgmvx#7d7be1)
 
-- [Some Intriguing Problems in Putnam and Beyond](problems/PB.pdf)
+- [Some Intriguing Theorems and Extended Ideas from Hamkin's Lectures on the Philosophy of Mathematics](https://www.overleaf.com/read/sztbzkhzndgd#62ac1e)
+
+- [Collection of Past Paper Questions from the Tsinghua University Leading Talent Program](https://www.overleaf.com/read/rjtpcxnzkvqh#8c222e)
 
 ---
 
